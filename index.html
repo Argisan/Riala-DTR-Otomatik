@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIALA DTR OTOMATIK • Argidaksii</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        body { font-family: 'Inter', system_ui, sans-serif; }
+        .title-font { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.025em; }
+        
+        .table-container {
+            border-collapse: collapse;
+        }
+        .table-container th, .table-container td {
+            border: 1px solid #64748b;
+            padding: 10px 12px;
+        }
+        .table-container th {
+            background-color: #1e40af;
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+        }
+        
+        .nav-tab {
+            transition: all 0.2s;
+        }
+        .nav-tab.active {
+            border-bottom: 4px solid #1e40af;
+            color: #1e40af;
+            font-weight: 600;
+        }
+        
+        .record-row:hover {
+            background-color: #f8fafc;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200">
+    <!-- HEADER -->
+    <div class="bg-slate-900 border-b border-slate-700 sticky top-0 z-50">
+        <div class="max-w-screen-2xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-4">
+                <div class="w-11 h-11 bg-blue-600 rounded-2xl flex items-center justify-center">
+                    <i class="fa-solid fa-clock text-3xl text-white"></i>
+                </div>
+                <div>
+                    <h1 class="title-font text-3xl font-semibold">RIALA DTR OTOMATIK</h1>
+                    <p class="text-xs text-slate-400 -mt-1">Argidaksii • Automatic Billing Tables</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center bg-slate-800 rounded-3xl p-1 text-sm font-medium">
+                <button onclick="switchTab(0)" id="tab-0"
+                        class="nav-tab active px-6 py-3 flex items-center gap-x-2 rounded-3xl">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>Add Records</span>
+                </button>
+                <button onclick="generateBillingTables()" id="tab-1"
+                        class="nav-tab px-6 py-3 flex items-center gap-x-2 rounded-3xl">
+                    <i class="fa-solid fa-file-lines"></i>
+                    <span>View 8 Billing Tables</span>
+                </button>
+            </div>
+            
+            <div class="flex items-center gap-x-3 text-sm">
+                <button onclick="clearAllData()" 
+                        class="px-4 py-2 text-red-400 hover:text-red-300 flex items-center gap-x-2">
+                    <i class="fa-solid fa-trash"></i>
+                    <span class="hidden md:block">Clear All</span>
+                </button>
+                <div class="text-xs bg-slate-700 px-3 py-1 rounded-2xl font-mono">
+                    v1.0 • Local Storage
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-screen-2xl mx-auto px-6 py-8">
+
+        <!-- TAB 0: ADD RECORDS -->
+        <div id="tab-content-0">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- INPUT FORM -->
+                <div class="lg:col-span-5 bg-white text-slate-900 rounded-3xl shadow-xl p-8">
+                    <h2 class="text-2xl font-semibold mb-6 flex items-center gap-x-3">
+                        <i class="fa-solid fa-pen-to-square text-blue-600"></i>
+                        Add New Duty Record
+                    </h2>
+                    
+                    <div class="space-y-6">
+                        <!-- Date -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-500 mb-2">DATE</label>
+                            <input type="date" id="input-date" 
+                                   class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-blue-500">
+                        </div>
+                        
+                        <!-- Post Area -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-500 mb-2">POST AREA NAME</label>
+                            <select id="input-post" 
+                                    class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-blue-500">
+                                <option value="">— Select Post Area —</option>
+                                <option value="ECHO 1">ECHO 1</option>
+                                <option value="ECHO 2">ECHO 2</option>
+                                <option value="ECHO 3">ECHO 3</option>
+                                <option value="ECHO 4">ECHO 4</option>
+                                <option value="ECHO 5">ECHO 5</option>
+                                <option value="ECHO 6">ECHO 6</option>
+                                <option value="ECHO 7">ECHO 7</option>
+                                <option value="LIMA 1">LIMA 1</option>
+                                <option value="LIMA 2">LIMA 2</option>
+                                <option value="LIMA 3">LIMA 3</option>
+                                <option value="LIMA 4">LIMA 4</option>
+                                <option value="LIMA 5">LIMA 5</option>
+                                <option value="MIKE 1">MIKE 1</option>
+                                <option value="MIKE 2">MIKE 2</option>
+                                <option value="MIKE 3">MIKE 3</option>
+                                <option value="MIKE 4">MIKE 4</option>
+                                <option value="R1">R1</option>
+                                <option value="R2">R2</option>
+                                <option value="R3">R3</option>
+                                <option value="CHARLIE 1">CHARLIE 1</option>
+                                <option value="CHARLIE 2">CHARLIE 2</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Shift -->
+                        <div>
+                            <label class="block text-sm font-medium text-slate-500 mb-2">SHIFT TYPE</label>
+                            <div class="flex gap-4">
+                                <label class="flex-1 flex items-center justify-center gap-3 border border-slate-300 hover:border-blue-500 rounded-3xl px-6 py-4 cursor-pointer">
+                                    <input type="radio" name="shift" value="day" id="shift-day" class="hidden peer">
+                                    <i class="fa-solid fa-sun text-yellow-500 peer-checked:text-blue-600"></i>
+                                    <span class="font-semibold peer-checked:text-blue-600">Dayshift</span>
+                                </label>
+                                <label class="flex-1 flex items-center justify-center gap-3 border border-slate-300 hover:border-blue-500 rounded-3xl px-6 py-4 cursor-pointer">
+                                    <input type="radio" name="shift" value="night" id="shift-night" class="hidden peer">
+                                    <i class="fa-solid fa-moon text-indigo-500 peer-checked:text-blue-600"></i>
+                                    <span class="font-semibold peer-checked:text-blue-600">Nightshift</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button onclick="addRecord()" 
+                                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-3xl text-xl font-semibold flex items-center justify-center gap-x-3 transition-all">
+                            <i class="fa-solid fa-plus"></i>
+                            ADD RECORD
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- SAVED RECORDS LIST -->
+                <div class="lg:col-span-7">
+                    <div class="flex justify-between items-baseline mb-4">
+                        <h2 class="text-2xl font-semibold">Saved Records (<span id="record-count">0</span>)</h2>
+                        <button onclick="generateBillingTables()" 
+                                class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-3xl flex items-center gap-x-3 text-sm font-semibold">
+                            <i class="fa-solid fa-magic"></i>
+                            GENERATE 8 BILLING TABLES
+                        </button>
+                    </div>
+                    
+                    <div id="records-list" class="bg-white text-slate-900 rounded-3xl overflow-hidden shadow-xl max-h-[600px] overflow-y-auto">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- TAB 1: BILLING TABLES -->
+        <div id="tab-content-1" class="hidden">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-semibold">8 Automatic Billing Tables</h2>
+                <button onclick="generateBillingTables()" 
+                        class="px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-3xl text-sm font-medium flex items-center gap-x-2">
+                    <i class="fa-solid fa-rotate"></i>
+                    Refresh Tables
+                </button>
+            </div>
+            
+            <div id="billing-tables-container" class="space-y-12">
+                <!-- 8 tables injected here by JavaScript -->
+            </div>
+            
+            <div class="text-center text-slate-400 text-xs mt-12">
+                Data is saved in your browser • Tables show here automatically
+            </div>
+        </div>
+    </div>
+
+    <!-- EDIT MODAL -->
+    <div id="edit-modal" onclick="if(event.target.id==='edit-modal')hideEditModal()" 
+         class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[9999]">
+        <div onclick="event.stopImmediatePropagation()" 
+             class="bg-white text-slate-900 rounded-3xl max-w-md w-full mx-4 p-8">
+            <h3 class="text-xl font-semibold mb-6">Edit Record</h3>
+            
+            <input type="hidden" id="edit-id">
+            
+            <div class="space-y-5">
+                <div>
+                    <label class="block text-sm mb-1 text-slate-500">Date</label>
+                    <input type="date" id="edit-date" class="w-full border border-slate-300 rounded-2xl px-4 py-3">
+                </div>
+                <div>
+                    <label class="block text-sm mb-1 text-slate-500">Post Area</label>
+                    <select id="edit-post" class="w-full border border-slate-300 rounded-2xl px-4 py-3">
+                        <!-- populated by JS -->
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm mb-1 text-slate-500">Shift</label>
+                    <select id="edit-shift" class="w-full border border-slate-300 rounded-2xl px-4 py-3">
+                        <option value="day">Dayshift</option>
+                        <option value="night">Nightshift</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="flex gap-x-3 mt-8">
+                <button onclick="hideEditModal()" 
+                        class="flex-1 py-4 text-slate-500 font-medium">Cancel</button>
+                <button onclick="saveEditedRecord()" 
+                        class="flex-1 py-4 bg-blue-600 text-white rounded-3xl font-semibold">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ====================== BILLING MAPPING (4 accounts = 8 tables) ======================
+        const billingMap = {
+            "ECHO 1": "T-123 Account/Billing",
+            "ECHO 2": "T-123 Account/Billing",
+            "ECHO 3": "T-123 Account/Billing",
+            "ECHO 4": "T-123 Account/Billing",
+            "LIMA 1": "T-123 Account/Billing",
+            "LIMA 2": "T-123 Account/Billing",
+            "LIMA 3": "T-123 Account/Billing",
+            "MIKE 1": "T-123 Account/Billing",
+            "MIKE 2": "T-123 Account/Billing",
+            "MIKE 3": "T-123 Account/Billing",
+            "R1": "T-123 Account/Billing",
+            "CHARLIE 1": "T-123 Account/Billing",
+            
+            "ECHO 5": "Amenities Account/Billing",
+            "CHARLIE 2": "Amenities Account/Billing",
+            
+            "LIMA 4": "Tower 4 Account/Billing",
+            "MIKE 4": "Tower 4 Account/Billing",
+            "R3": "Tower 4 Account/Billing",
+            
+            "LIMA 5": "Tower 5 Account/Billing",
+            "ECHO 6": "Tower 5 Account/Billing",
+            "ECHO 7": "Tower 5 Account/Billing",
+            "R2": "Tower 5 Account/Billing"
+        };
+
+        const BILLING_ORDER = [
+            "T-123 Account/Billing",
+            "Amenities Account/Billing",
+            "Tower 4 Account/Billing",
+            "Tower 5 Account/Billing"
+        ];
+
+        // ====================== DATA STORAGE ======================
+        let records = []; // { id, date, post, shift }
+
+        function loadRecords() {
+            const saved = localStorage.getItem("riala_dtr_records");zzz
+            if (saved) records = JSON.parse(saved);
+        }
+
+        function saveRecords() {
+            localStorage.setItem("riala_dtr_records", JSON.stringify(records));
+        }
+
+        // ====================== ADD / EDIT RECORD ======================
+        function addRecord() {
+            const date = document.getElementById("input-date").value;
+            const post = document.getElementById("input-post").value;
+            const shiftDay = document.getElementById("shift-day").checked;
+            const shiftNight = document.getElementById("shift-night").checked;
+            
+            if (!date) return alert("❌ Please select a date");
+            if (!post) return alert("❌ Please select a Post Area");
+            if (!shiftDay && !shiftNight) return alert("❌ Please select Dayshift or Nightshift");
+            
+            const shift = shiftDay ? "day" : "night";
+            
+            const newRecord = {
+                id: "rec_" + Date.now(),
+                date: date,
+                post: post,
+                shift: shift
+            };
+            
+            records.unshift(newRecord); // newest on top
+            saveRecords();
+            renderRecordsList();
+            
+            // Clear form
+            document.getElementById("input-date").value = "";
+            document.getElementById("input-post").value = "";
+            document.getElementById("shift-day").checked = false;
+            document.getElementById("shift-night").checked = false;
+            
+            alert("✅ Record added successfully!");
+        }
+
+        function deleteRecord(id) {
+            if (confirm("Delete this record?")) {
+                records = records.filter(r => r.id !== id);
+                saveRecords();
+                renderRecordsList();
+            }
+        }
+
+        let editingId = null;
+        
+        function editRecord(id) {
+            const record = records.find(r => r.id === id);
+            if (!record) return;
+            
+            editingId = id;
+            
+            // Populate modal
+            document.getElementById("edit-id").value = id;
+            document.getElementById("edit-date").value = record.date;
+            document.getElementById("edit-post").innerHTML = `
+                <option value="${record.post}">${record.post}</option>
+                ${Object.keys(billingMap).map(p => `<option value="${p}" ${p===record.post?'selected':''}>${p}</option>`).join('')}
+            `;
+            document.getElementById("edit-shift").value = record.shift;
+            
+            document.getElementById("edit-modal").classList.remove("hidden");
+            document.getElementById("edit-modal").classList.add("flex");
+        }
+        
+        function saveEditedRecord() {
+            const id = document.getElementById("edit-id").value;
+            const record = records.find(r => r.id === id);
+            if (!record) return;
+            
+            record.date = document.getElementById("edit-date").value;
+            record.post = document.getElementById("edit-post").value;
+            record.shift = document.getElementById("edit-shift").value;
+            
+            saveRecords();
+            hideEditModal();
+            renderRecordsList();
+        }
+        
+        function hideEditModal() {
+            const modal = document.getElementById("edit-modal");
+            modal.classList.remove("flex");
+            modal.classList.add("hidden");
+            editingId = null;
+        }
+
+        function renderRecordsList() {
+            const container = document.getElementById("records-list");
+            let html = `<table class="w-full"><thead class="bg-slate-100"><tr>
+                <th class="text-left px-6 py-4">Date</th>
+                <th class="text-left px-4 py-4">Post Area</th>
+                <th class="px-4 py-4">Shift</th>
+                <th class="w-24 py-4"></th>
+            </tr></thead><tbody>`;
+            
+            records.forEach(rec => {
+                const displayDate = new Date(rec.date).toLocaleDateString('en-US', {month:'short', day:'numeric', year:'2-digit'});
+                const shiftLabel = rec.shift === "day" ? 
+                    `<span class="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-2xl text-xs font-bold">DAYSHIFT</span>` : 
+                    `<span class="bg-indigo-100 text-indigo-700 px-3 py-1 rounded-2xl text-xs font-bold">NIGHTSHIFT</span>`;
+                
+                html += `
+                <tr class="record-row border-t">
+                    <td class="px-6 py-4 font-medium">${displayDate}</td>
+                    <td class="px-4 py-4 font-semibold">${rec.post}</td>
+                    <td class="px-4 py-4">${shiftLabel}</td>
+                    <td class="px-4 py-4 text-center">
+                        <button onclick="editRecord('${rec.id}')" class="text-blue-600 hover:text-blue-700 mr-3">
+                            <i class="fa-solid fa-edit"></i>
+                        </button>
+                        <button onclick="deleteRecord('${rec.id}')" class="text-red-500 hover:text-red-600">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>`;
+            });
+            
+            html += `</tbody></table>`;
+            
+            if (records.length === 0) {
+                html = `<div class="p-12 text-center text-slate-400">
+                    <i class="fa-solid fa-inbox text-5xl mb-4"></i>
+                    <p class="text-lg">No records yet</p>
+                    <p class="text-sm">Add your first duty record on the left</p>
+                </div>`;
+            }
+            
+            container.innerHTML = html;
+            document.getElementById("record-count").textContent = records.length;
+        }
+
+        // ====================== GENERATE 8 BILLING TABLES ======================
+        function generateBillingTables() {
+            const container = document.getElementById("billing-tables-container");
+            container.innerHTML = "";
+            
+            const shiftTypes = ["day", "night"];
+            
+            BILLING_ORDER.forEach(billing => {
+                shiftTypes.forEach(shiftType => {
+                    const filtered = records.filter(rec => {
+                        return billingMap[rec.post] === billing && rec.shift === shiftType;
+                    });
+
+                    filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+                    
+                    const shiftTitle = shiftType === "day" ? "Dayshift" : "Nightshift";
+                    const timeIn = shiftType === "day" ? "0700H" : "1900H";
+                    const timeOut = shiftType === "day" ? "1900H" : "0700H";
+
+                    const rowsHTML = filtered.length
+                        ? filtered.map(rec => {
+                            const displayDate = new Date(rec.date).toLocaleDateString('en-US', {month:'2-digit', day:'2-digit', year:'2-digit'});
+                            return `
+                            <tr>
+                                <td class="font-medium">${displayDate}</td>
+                                <td class="text-center font-mono">${timeIn}</td>
+                                <td class="text-center font-mono">${timeOut}</td>
+                                <td class="text-center font-bold text-emerald-600">12</td>
+                                <td class="font-semibold">${rec.post}</td>
+                            </tr>`;
+                        }).join("")
+                        : `
+                            <tr>
+                                <td colspan="5" class="text-center text-slate-400 py-8">
+                                    No records yet for this billing and shift
+                                </td>
+                            </tr>`;
+                    
+                    const tableHTML = `
+                    <div class="billing-table-card bg-white text-slate-900 rounded-3xl shadow-xl p-6">
+                        <div class="flex justify-between items-start mb-6 border-b pb-4">
+                            <div>
+                                <div class="text-xs font-bold uppercase tracking-widest text-blue-600">${billing}</div>
+                                <h3 class="text-2xl font-semibold">${shiftTitle}</h3>
+                            </div>
+                            <div class="billing-actions text-right">
+                                <button onclick="printTable(this)" 
+                                        class="flex items-center gap-x-2 text-sm text-slate-500 hover:text-slate-700">
+                                    <i class="fa-solid fa-print"></i> PRINT
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <table class="table-container w-full text-sm">
+                            <thead>
+                                <tr>
+                                    <th class="text-left">Date</th>
+                                    <th class="text-center">Time In</th>
+                                    <th class="text-center">Time Out</th>
+                                    <th class="text-center">Hours of Duty</th>
+                                    <th class="text-left">Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${rowsHTML}
+                            </tbody>
+                        </table>
+                        
+                        <div class="mt-4 text-xs text-slate-400 text-center">
+                            Total records: <span class="font-semibold text-slate-700">${filtered.length}</span>
+                        </div>
+                    </div>`;
+                    
+                    container.innerHTML += tableHTML;
+                });
+            });
+            
+            // Auto-switch to billing tab
+            switchTab(1);
+        }
+
+        // ====================== PRINT ======================
+        function printTable(btn) {
+            const tableSection = btn.closest(".billing-table-card");
+            if (!tableSection) return;
+
+            const printable = tableSection.cloneNode(true);
+            const actions = printable.querySelector(".billing-actions");
+            if (actions) actions.remove();
+
+            const printWin = window.open("", "_blank");
+            if (!printWin) {
+                alert("Please allow pop-ups to print this table.");
+                return;
+            }
+
+            printWin.document.write(`
+                <html><head><title>RIALA DTR</title>
+                <style>
+                    body { font-family: Arial, sans-serif; padding: 30px; }
+                    table { width: 100%; border-collapse: collapse; }
+                    th, td { border: 1px solid #333; padding: 10px; text-align: left; }
+                    th { background: #1e40af; color: white; }
+                    .text-center { text-align: center; }
+                    .font-bold, .font-semibold, .font-medium { font-weight: 700; }
+                    .text-2xl { font-size: 24px; }
+                </style>
+                </head><body>
+                ${printable.outerHTML}
+                <script>window.print(); window.close();<\/script>
+                </body></html>
+            `);
+            printWin.document.close();
+        }
+
+        function clearAllData() {
+            if (confirm("Clear ALL saved records permanently?")) {
+                records = [];
+                localStorage.removeItem("riala_dtr_records");
+                renderRecordsList();
+                document.getElementById("billing-tables-container").innerHTML = "";
+                switchTab(0);
+            }
+        }
+
+        function switchTab(tab) {
+            document.getElementById("tab-content-0").classList.toggle("hidden", tab !== 0);
+            document.getElementById("tab-content-1").classList.toggle("hidden", tab !== 1);
+            
+            document.getElementById("tab-0").classList.toggle("active", tab === 0);
+            document.getElementById("tab-1").classList.toggle("active", tab === 1);
+            
+        }
+
+        // ====================== INITIALIZE ======================
+        function init() {
+            loadRecords();
+            renderRecordsList();
+            
+            // Set default date to today
+            const today = new Date().toISOString().split("T")[0];
+            document.getElementById("input-date").value = today;
+            
+            console.log("%c✅ RIALA DTR OTOMATIK by Argidaksii ready!", "color:#1e40af; font-weight:600");
+        }
+        
+        window.onload = init;
+    </script>
+</body>
+</html>
