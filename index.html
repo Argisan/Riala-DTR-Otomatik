@@ -2,14 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RIALA DTR OTOMATIK • Argidaksii</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>RIALA DTR OTOMATIK &bull; Argidaksii</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
-        body { font-family: 'Inter', system_ui, sans-serif; }
-        .title-font { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.025em; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            -webkit-text-size-adjust: 100%;
+        }
+
+        body {
+            min-width: 320px;
+            overflow-x: hidden;
+            font-family: 'Inter', system-ui, sans-serif;
+        }
+
+        button,
+        input,
+        select {
+            min-height: 44px;
+            font: inherit;
+        }
+
+        input,
+        select {
+            font-size: 16px;
+        }
+
+        button,
+        label {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .title-font {
+            font-family: 'Space Grotesk', sans-serif;
+            letter-spacing: 0;
+        }
         
         .table-container {
             border-collapse: collapse;
@@ -38,23 +72,379 @@
         .record-row:hover {
             background-color: #f8fafc;
         }
+
+        .site-header {
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
+        }
+
+        .page-shell {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        @supports (padding-left: max(0px)) {
+            .page-shell {
+                padding-left: max(1.5rem, env(safe-area-inset-left));
+                padding-right: max(1.5rem, env(safe-area-inset-right));
+            }
+        }
+
+        .brand-lockup,
+        .brand-copy,
+        .header-actions,
+        .records-header,
+        .tables-header {
+            min-width: 0;
+        }
+
+        .brand-copy h1,
+        .brand-copy p,
+        .nav-tab span {
+            overflow-wrap: anywhere;
+        }
+
+        .nav-tab {
+            min-width: 0;
+            justify-content: center;
+            border-bottom: 4px solid transparent;
+        }
+
+        .nav-tab span {
+            min-width: 0;
+            text-align: center;
+        }
+
+        .records-list-panel {
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .records-table {
+            min-width: 520px;
+        }
+
+        .table-scroll {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .table-container {
+            min-width: 620px;
+        }
+
+        .icon-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 9999px;
+        }
+
+        @media (max-width: 1024px) {
+            .header-shell {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .app-tabs {
+                order: 3;
+                width: 100%;
+            }
+
+            .entry-grid {
+                gap: 1.5rem !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-shell {
+                display: grid !important;
+                grid-template-columns: minmax(0, 1fr) auto;
+                align-items: center !important;
+                gap: 0.85rem;
+                padding: 1rem !important;
+            }
+
+            .brand-lockup {
+                gap: 0.75rem !important;
+            }
+
+            .brand-icon {
+                width: 2.5rem !important;
+                height: 2.5rem !important;
+                border-radius: 1rem !important;
+            }
+
+            .brand-icon i {
+                font-size: 1.35rem !important;
+            }
+
+            .brand-copy h1 {
+                font-size: 1.35rem !important;
+                line-height: 1.15;
+            }
+
+            .brand-copy p {
+                margin-top: 0.15rem !important;
+                font-size: 0.7rem;
+            }
+
+            .header-actions {
+                justify-content: flex-end;
+                gap: 0.5rem !important;
+            }
+
+            .version-pill {
+                display: none;
+            }
+
+            .app-tabs {
+                grid-column: 1 / -1;
+                display: grid !important;
+                grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+                width: 100%;
+                border-radius: 1rem !important;
+            }
+
+            .nav-tab {
+                padding: 0.75rem 0.55rem !important;
+                border-radius: 0.85rem !important;
+                line-height: 1.15;
+            }
+
+            .page-shell {
+                padding: 1.25rem 1rem 2rem !important;
+            }
+
+            @supports (padding-left: max(0px)) {
+                .page-shell {
+                    padding-left: max(1rem, env(safe-area-inset-left)) !important;
+                    padding-right: max(1rem, env(safe-area-inset-right)) !important;
+                }
+            }
+
+            .form-card,
+            .billing-table-card,
+            .records-list-panel {
+                border-radius: 1rem !important;
+            }
+
+            .form-card {
+                padding: 1.25rem !important;
+            }
+
+            .form-title,
+            .section-title {
+                font-size: 1.25rem !important;
+                line-height: 1.25;
+            }
+
+            .records-header,
+            .tables-header {
+                flex-direction: column;
+                align-items: stretch !important;
+                gap: 0.75rem;
+            }
+
+            .records-header button,
+            .tables-header button {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .records-list-panel {
+                max-height: none !important;
+                overflow: visible !important;
+            }
+
+            .billing-table-card {
+                padding: 1rem !important;
+            }
+
+            .billing-card-header {
+                flex-direction: column;
+                align-items: stretch !important;
+                gap: 0.85rem;
+            }
+
+            .billing-actions button {
+                justify-content: center;
+                border: 1px solid #cbd5e1;
+                border-radius: 0.85rem;
+            }
+
+            #edit-modal {
+                align-items: flex-end !important;
+                padding: 1rem;
+                padding-bottom: calc(1rem + env(safe-area-inset-bottom));
+            }
+
+            .modal-panel {
+                max-height: calc(100vh - 2rem);
+                max-height: calc(100dvh - 2rem);
+                margin-left: 0 !important;
+                margin-right: 0 !important;
+                overflow-y: auto;
+                border-radius: 1rem !important;
+                padding: 1.25rem !important;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .records-table,
+            .records-table thead,
+            .records-table tbody,
+            .records-table tr,
+            .records-table td,
+            .billing-table,
+            .billing-table thead,
+            .billing-table tbody,
+            .billing-table tr,
+            .billing-table td {
+                display: block;
+                width: 100%;
+                min-width: 0;
+            }
+
+            .records-table thead,
+            .billing-table thead {
+                position: absolute;
+                width: 1px;
+                height: 1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+            }
+
+            .records-table {
+                min-width: 0;
+            }
+
+            .records-table tbody {
+                display: grid;
+                gap: 0.75rem;
+                padding: 0.75rem;
+                background: #f8fafc;
+            }
+
+            .records-table tr,
+            .billing-table tr {
+                border: 1px solid #e2e8f0 !important;
+                border-radius: 1rem;
+                background: #fff;
+                padding: 0.75rem;
+            }
+
+            .records-table td,
+            .billing-table td {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 1rem;
+                border: 0 !important;
+                padding: 0.4rem 0 !important;
+            }
+
+            .records-table td::before,
+            .billing-table td::before {
+                content: attr(data-label);
+                color: #64748b;
+                font-size: 0.72rem;
+                font-weight: 700;
+                text-align: left;
+                text-transform: uppercase;
+            }
+
+            .records-table td:last-child {
+                justify-content: flex-end;
+                gap: 0.35rem;
+                padding-top: 0.6rem !important;
+            }
+
+            .records-table td:last-child::before,
+            .billing-table .empty-state::before {
+                display: none;
+            }
+
+            .billing-table tbody {
+                display: grid;
+                gap: 0.75rem;
+            }
+
+            .billing-table td {
+                text-align: right;
+            }
+
+            .billing-table .empty-state {
+                display: block !important;
+                padding: 1.25rem !important;
+                text-align: center !important;
+            }
+
+            .table-container {
+                min-width: 0;
+                border-collapse: separate;
+                border-spacing: 0;
+            }
+
+            .table-scroll {
+                overflow-x: visible;
+            }
+
+            .primary-action {
+                border-radius: 1rem !important;
+                padding-top: 0.95rem !important;
+                padding-bottom: 0.95rem !important;
+                font-size: 1rem !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .shift-options {
+                gap: 0.75rem !important;
+            }
+
+            .shift-options label {
+                padding: 0.85rem 0.6rem !important;
+                border-radius: 1rem !important;
+            }
+
+            .nav-tab {
+                gap: 0.4rem !important;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .brand-copy p {
+                display: none;
+            }
+
+            .nav-tab span {
+                font-size: 0.78rem;
+            }
+
+            .shift-options {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body class="bg-slate-950 text-slate-200">
     <!-- HEADER -->
-    <div class="bg-slate-900 border-b border-slate-700 sticky top-0 z-50">
-        <div class="max-w-screen-2xl mx-auto px-6 py-5 flex items-center justify-between">
-            <div class="flex items-center gap-x-4">
-                <div class="w-11 h-11 bg-blue-600 rounded-2xl flex items-center justify-center">
+    <div class="site-header bg-slate-900 border-b border-slate-700 sticky top-0 z-50">
+        <div class="header-shell max-w-screen-2xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="brand-lockup flex items-center gap-x-4">
+                <div class="brand-icon w-11 h-11 bg-blue-600 rounded-2xl flex items-center justify-center">
                     <i class="fa-solid fa-clock text-3xl text-white"></i>
                 </div>
-                <div>
+                <div class="brand-copy">
                     <h1 class="title-font text-3xl font-semibold">RIALA DTR OTOMATIK</h1>
-                    <p class="text-xs text-slate-400 -mt-1">Argidaksii • Automatic Billing Tables</p>
+                    <p class="text-xs text-slate-400 -mt-1">Argidaksii &bull; Automatic Billing Tables</p>
                 </div>
             </div>
             
-            <div class="flex items-center bg-slate-800 rounded-3xl p-1 text-sm font-medium">
+            <div class="app-tabs flex items-center bg-slate-800 rounded-3xl p-1 text-sm font-medium">
                 <button onclick="switchTab(0)" id="tab-0"
                         class="nav-tab active px-6 py-3 flex items-center gap-x-2 rounded-3xl">
                     <i class="fa-solid fa-plus"></i>
@@ -67,28 +457,28 @@
                 </button>
             </div>
             
-            <div class="flex items-center gap-x-3 text-sm">
+            <div class="header-actions flex items-center gap-x-3 text-sm">
                 <button onclick="clearAllData()" 
-                        class="px-4 py-2 text-red-400 hover:text-red-300 flex items-center gap-x-2">
+                        class="clear-button px-4 py-2 text-red-400 hover:text-red-300 flex items-center gap-x-2">
                     <i class="fa-solid fa-trash"></i>
                     <span class="hidden md:block">Clear All</span>
                 </button>
-                <div class="text-xs bg-slate-700 px-3 py-1 rounded-2xl font-mono">
-                    v1.0 • Local Storage
+                <div class="version-pill text-xs bg-slate-700 px-3 py-1 rounded-2xl font-mono">
+                    v1.0 &bull; Local Storage
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="max-w-screen-2xl mx-auto px-6 py-8">
+    <div class="page-shell max-w-screen-2xl mx-auto px-6 py-8">
 
         <!-- TAB 0: ADD RECORDS -->
         <div id="tab-content-0">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="entry-grid grid grid-cols-1 lg:grid-cols-12 gap-8">
                 
                 <!-- INPUT FORM -->
-                <div class="lg:col-span-5 bg-white text-slate-900 rounded-3xl shadow-xl p-8">
-                    <h2 class="text-2xl font-semibold mb-6 flex items-center gap-x-3">
+                <div class="form-card lg:col-span-5 bg-white text-slate-900 rounded-3xl shadow-xl p-8">
+                    <h2 class="form-title text-2xl font-semibold mb-6 flex items-center gap-x-3">
                         <i class="fa-solid fa-pen-to-square text-blue-600"></i>
                         Add New Duty Record
                     </h2>
@@ -106,7 +496,7 @@
                             <label class="block text-sm font-medium text-slate-500 mb-2">POST AREA NAME</label>
                             <select id="input-post" 
                                     class="w-full border border-slate-300 rounded-2xl px-5 py-4 text-lg focus:outline-none focus:border-blue-500">
-                                <option value="">— Select Post Area —</option>
+                                <option value="">&mdash; Select Post Area &mdash;</option>
                                 <option value="ECHO 1">ECHO 1</option>
                                 <option value="ECHO 2">ECHO 2</option>
                                 <option value="ECHO 3">ECHO 3</option>
@@ -134,7 +524,7 @@
                         <!-- Shift -->
                         <div>
                             <label class="block text-sm font-medium text-slate-500 mb-2">SHIFT TYPE</label>
-                            <div class="flex gap-4">
+                            <div class="shift-options flex gap-4">
                                 <label class="flex-1 flex items-center justify-center gap-3 border border-slate-300 hover:border-blue-500 rounded-3xl px-6 py-4 cursor-pointer">
                                     <input type="radio" name="shift" value="day" id="shift-day" class="hidden peer">
                                     <i class="fa-solid fa-sun text-yellow-500 peer-checked:text-blue-600"></i>
@@ -149,7 +539,7 @@
                         </div>
                         
                         <button onclick="addRecord()" 
-                                class="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-3xl text-xl font-semibold flex items-center justify-center gap-x-3 transition-all">
+                                class="primary-action w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-3xl text-xl font-semibold flex items-center justify-center gap-x-3 transition-all">
                             <i class="fa-solid fa-plus"></i>
                             ADD RECORD
                         </button>
@@ -158,8 +548,8 @@
                 
                 <!-- SAVED RECORDS LIST -->
                 <div class="lg:col-span-7">
-                    <div class="flex justify-between items-baseline mb-4">
-                        <h2 class="text-2xl font-semibold">Saved Records (<span id="record-count">0</span>)</h2>
+                    <div class="records-header flex justify-between items-baseline mb-4">
+                        <h2 class="section-title text-2xl font-semibold">Saved Records (<span id="record-count">0</span>)</h2>
                         <button onclick="generateBillingTables()" 
                                 class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-3xl flex items-center gap-x-3 text-sm font-semibold">
                             <i class="fa-solid fa-magic"></i>
@@ -167,7 +557,7 @@
                         </button>
                     </div>
                     
-                    <div id="records-list" class="bg-white text-slate-900 rounded-3xl overflow-hidden shadow-xl max-h-[600px] overflow-y-auto">
+                    <div id="records-list" class="records-list-panel bg-white text-slate-900 rounded-3xl overflow-hidden shadow-xl max-h-[600px] overflow-y-auto">
                         <!-- Populated by JS -->
                     </div>
                 </div>
@@ -176,8 +566,8 @@
         
         <!-- TAB 1: BILLING TABLES -->
         <div id="tab-content-1" class="hidden">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-semibold">8 Automatic Billing Tables</h2>
+            <div class="tables-header flex justify-between items-center mb-6">
+                <h2 class="section-title text-2xl font-semibold">8 Automatic Billing Tables</h2>
                 <button onclick="generateBillingTables()" 
                         class="px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-3xl text-sm font-medium flex items-center gap-x-2">
                     <i class="fa-solid fa-rotate"></i>
@@ -190,7 +580,7 @@
             </div>
             
             <div class="text-center text-slate-400 text-xs mt-12">
-                Data is saved in your browser • Tables show here automatically
+                Data is saved in your browser &bull; Tables show here automatically
             </div>
         </div>
     </div>
@@ -199,7 +589,7 @@
     <div id="edit-modal" onclick="if(event.target.id==='edit-modal')hideEditModal()" 
          class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-[9999]">
         <div onclick="event.stopImmediatePropagation()" 
-             class="bg-white text-slate-900 rounded-3xl max-w-md w-full mx-4 p-8">
+             class="modal-panel bg-white text-slate-900 rounded-3xl max-w-md w-full mx-4 p-8">
             <h3 class="text-xl font-semibold mb-6">Edit Record</h3>
             
             <input type="hidden" id="edit-id">
@@ -273,8 +663,16 @@
         let records = []; // { id, date, post, shift }
 
         function loadRecords() {
-            const saved = localStorage.getItem("riala_dtr_records");zzz
-            if (saved) records = JSON.parse(saved);
+            const saved = localStorage.getItem("riala_dtr_records");
+            if (!saved) return;
+
+            try {
+                const parsedRecords = JSON.parse(saved);
+                records = Array.isArray(parsedRecords) ? parsedRecords : [];
+            } catch (error) {
+                records = [];
+                localStorage.removeItem("riala_dtr_records");
+            }
         }
 
         function saveRecords() {
@@ -288,9 +686,9 @@
             const shiftDay = document.getElementById("shift-day").checked;
             const shiftNight = document.getElementById("shift-night").checked;
             
-            if (!date) return alert("❌ Please select a date");
-            if (!post) return alert("❌ Please select a Post Area");
-            if (!shiftDay && !shiftNight) return alert("❌ Please select Dayshift or Nightshift");
+            if (!date) return alert("Please select a date");
+            if (!post) return alert("Please select a Post Area");
+            if (!shiftDay && !shiftNight) return alert("Please select Dayshift or Nightshift");
             
             const shift = shiftDay ? "day" : "night";
             
@@ -311,7 +709,7 @@
             document.getElementById("shift-day").checked = false;
             document.getElementById("shift-night").checked = false;
             
-            alert("✅ Record added successfully!");
+            alert("Record added successfully!");
         }
 
         function deleteRecord(id) {
@@ -366,7 +764,7 @@
 
         function renderRecordsList() {
             const container = document.getElementById("records-list");
-            let html = `<table class="w-full"><thead class="bg-slate-100"><tr>
+            let html = `<table class="records-table w-full"><thead class="bg-slate-100"><tr>
                 <th class="text-left px-6 py-4">Date</th>
                 <th class="text-left px-4 py-4">Post Area</th>
                 <th class="px-4 py-4">Shift</th>
@@ -381,14 +779,14 @@
                 
                 html += `
                 <tr class="record-row border-t">
-                    <td class="px-6 py-4 font-medium">${displayDate}</td>
-                    <td class="px-4 py-4 font-semibold">${rec.post}</td>
-                    <td class="px-4 py-4">${shiftLabel}</td>
-                    <td class="px-4 py-4 text-center">
-                        <button onclick="editRecord('${rec.id}')" class="text-blue-600 hover:text-blue-700 mr-3">
+                    <td data-label="Date" class="px-6 py-4 font-medium">${displayDate}</td>
+                    <td data-label="Post Area" class="px-4 py-4 font-semibold">${rec.post}</td>
+                    <td data-label="Shift" class="px-4 py-4">${shiftLabel}</td>
+                    <td data-label="Actions" class="px-4 py-4 text-center">
+                        <button onclick="editRecord('${rec.id}')" class="icon-button text-blue-600 hover:text-blue-700" aria-label="Edit record">
                             <i class="fa-solid fa-edit"></i>
                         </button>
-                        <button onclick="deleteRecord('${rec.id}')" class="text-red-500 hover:text-red-600">
+                        <button onclick="deleteRecord('${rec.id}')" class="icon-button text-red-500 hover:text-red-600" aria-label="Delete record">
                             <i class="fa-solid fa-trash"></i>
                         </button>
                     </td>
@@ -433,23 +831,23 @@
                             const displayDate = new Date(rec.date).toLocaleDateString('en-US', {month:'2-digit', day:'2-digit', year:'2-digit'});
                             return `
                             <tr>
-                                <td class="font-medium">${displayDate}</td>
-                                <td class="text-center font-mono">${timeIn}</td>
-                                <td class="text-center font-mono">${timeOut}</td>
-                                <td class="text-center font-bold text-emerald-600">12</td>
-                                <td class="font-semibold">${rec.post}</td>
+                                <td data-label="Date" class="font-medium">${displayDate}</td>
+                                <td data-label="Time In" class="text-center font-mono">${timeIn}</td>
+                                <td data-label="Time Out" class="text-center font-mono">${timeOut}</td>
+                                <td data-label="Hours" class="text-center font-bold text-emerald-600">12</td>
+                                <td data-label="Remarks" class="font-semibold">${rec.post}</td>
                             </tr>`;
                         }).join("")
                         : `
                             <tr>
-                                <td colspan="5" class="text-center text-slate-400 py-8">
+                                <td colspan="5" class="empty-state text-center text-slate-400 py-8">
                                     No records yet for this billing and shift
                                 </td>
                             </tr>`;
                     
                     const tableHTML = `
                     <div class="billing-table-card bg-white text-slate-900 rounded-3xl shadow-xl p-6">
-                        <div class="flex justify-between items-start mb-6 border-b pb-4">
+                        <div class="billing-card-header flex justify-between items-start mb-6 border-b pb-4">
                             <div>
                                 <div class="text-xs font-bold uppercase tracking-widest text-blue-600">${billing}</div>
                                 <h3 class="text-2xl font-semibold">${shiftTitle}</h3>
@@ -462,20 +860,22 @@
                             </div>
                         </div>
                         
-                        <table class="table-container w-full text-sm">
-                            <thead>
-                                <tr>
-                                    <th class="text-left">Date</th>
-                                    <th class="text-center">Time In</th>
-                                    <th class="text-center">Time Out</th>
-                                    <th class="text-center">Hours of Duty</th>
-                                    <th class="text-left">Remarks</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${rowsHTML}
-                            </tbody>
-                        </table>
+                        <div class="table-scroll">
+                            <table class="billing-table table-container w-full text-sm">
+                                <thead>
+                                    <tr>
+                                        <th class="text-left">Date</th>
+                                        <th class="text-center">Time In</th>
+                                        <th class="text-center">Time Out</th>
+                                        <th class="text-center">Hours of Duty</th>
+                                        <th class="text-left">Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${rowsHTML}
+                                </tbody>
+                            </table>
+                        </div>
                         
                         <div class="mt-4 text-xs text-slate-400 text-center">
                             Total records: <span class="font-semibold text-slate-700">${filtered.length}</span>
@@ -552,7 +952,7 @@
             const today = new Date().toISOString().split("T")[0];
             document.getElementById("input-date").value = today;
             
-            console.log("%c✅ RIALA DTR OTOMATIK by Argidaksii ready!", "color:#1e40af; font-weight:600");
+            console.log("%cRIALA DTR OTOMATIK by Argidaksii ready!", "color:#1e40af; font-weight:600");
         }
         
         window.onload = init;
