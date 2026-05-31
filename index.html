@@ -142,6 +142,39 @@
             border-radius: 9999px;
         }
 
+        .welcome-screen {
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(circle at 18% 18%, rgba(59, 130, 246, 0.28), transparent 30rem),
+                radial-gradient(circle at 82% 74%, rgba(16, 185, 129, 0.22), transparent 28rem),
+                linear-gradient(135deg, #020617 0%, #0f172a 48%, #172554 100%);
+        }
+
+        .welcome-panel {
+            width: min(100%, 520px);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(15, 23, 42, 0.78);
+            box-shadow: 0 28px 80px rgba(2, 6, 23, 0.4);
+            backdrop-filter: blur(22px);
+        }
+
+        .welcome-input {
+            background: rgba(255, 255, 255, 0.96);
+        }
+
+        .welcome-success {
+            min-height: 8.5rem;
+        }
+
+        #welcome-screen.hidden {
+            display: none;
+        }
+
         @media (max-width: 1024px) {
             .header-shell {
                 flex-wrap: wrap;
@@ -194,10 +227,6 @@
             .header-actions {
                 justify-content: flex-end;
                 gap: 0.5rem !important;
-            }
-
-            .version-pill {
-                display: none;
             }
 
             .app-tabs {
@@ -293,103 +322,18 @@
         }
 
         @media (max-width: 640px) {
-            .records-table,
-            .records-table thead,
-            .records-table tbody,
-            .records-table tr,
-            .records-table td,
-            .billing-table,
-            .billing-table thead,
-            .billing-table tbody,
-            .billing-table tr,
-            .billing-table td {
-                display: block;
-                width: 100%;
-                min-width: 0;
-            }
-
-            .records-table thead,
-            .billing-table thead {
-                position: absolute;
-                width: 1px;
-                height: 1px;
-                overflow: hidden;
-                clip: rect(0, 0, 0, 0);
-            }
-
             .records-table {
-                min-width: 0;
-            }
-
-            .records-table tbody {
-                display: grid;
-                gap: 0.75rem;
-                padding: 0.75rem;
-                background: #f8fafc;
-            }
-
-            .records-table tr,
-            .billing-table tr {
-                border: 1px solid #e2e8f0 !important;
-                border-radius: 1rem;
-                background: #fff;
-                padding: 0.75rem;
-            }
-
-            .records-table td,
-            .billing-table td {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 1rem;
-                border: 0 !important;
-                padding: 0.4rem 0 !important;
-            }
-
-            .records-table td::before,
-            .billing-table td::before {
-                content: attr(data-label);
-                color: #64748b;
-                font-size: 0.72rem;
-                font-weight: 700;
-                text-align: left;
-                text-transform: uppercase;
-            }
-
-            .records-table td:last-child {
-                justify-content: flex-end;
-                gap: 0.35rem;
-                padding-top: 0.6rem !important;
-            }
-
-            .records-table td:last-child::before,
-            .billing-table .empty-state::before {
-                display: none;
-            }
-
-            .billing-table tbody {
-                display: grid;
-                gap: 0.75rem;
-            }
-
-            .billing-table td {
-                text-align: right;
-            }
-
-            .billing-table .empty-state {
-                display: block !important;
-                padding: 1.25rem !important;
-                text-align: center !important;
+                min-width: 520px;
             }
 
             .table-container {
-                min-width: 0;
-                border-collapse: separate;
-                border-spacing: 0;
+                min-width: 620px;
             }
 
+            .records-list-panel,
             .table-scroll {
-                overflow-x: visible;
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch;
             }
 
             .primary-action {
@@ -397,6 +341,15 @@
                 padding-top: 0.95rem !important;
                 padding-bottom: 0.95rem !important;
                 font-size: 1rem !important;
+            }
+
+            .welcome-screen {
+                padding: 1rem;
+            }
+
+            .welcome-panel {
+                border-radius: 1.25rem !important;
+                padding: 1.25rem !important;
             }
         }
 
@@ -431,6 +384,43 @@
     </style>
 </head>
 <body class="bg-slate-950 text-slate-200">
+    <!-- WELCOME SCREEN -->
+    <main id="welcome-screen" class="welcome-screen">
+        <section class="welcome-panel rounded-3xl p-8 text-white">
+            <div class="mb-8">
+                <div class="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-500 text-2xl shadow-lg shadow-blue-950/30">
+                    <i class="fa-solid fa-hand-sparkles"></i>
+                </div>
+                <h1 class="title-font text-5xl font-semibold leading-tight">Welcome!</h1>
+                <p class="mt-4 text-base leading-7 text-slate-200">
+                    Tell us your name so we can make this workspace feel a little more yours.
+                </p>
+            </div>
+
+            <form id="welcome-form" class="space-y-4">
+                <label for="welcome-name" class="block text-sm font-semibold uppercase text-blue-100">Your Name</label>
+                <input id="welcome-name" type="text" autocomplete="name" placeholder="Enter your name"
+                       class="welcome-input w-full rounded-2xl border border-white/20 px-5 py-4 text-lg text-slate-900 outline-none transition focus:border-blue-300 focus:ring-4 focus:ring-blue-400/30">
+                <button type="submit"
+                        class="w-full rounded-2xl bg-emerald-500 px-6 py-4 text-lg font-semibold text-white transition hover:bg-emerald-400 focus:outline-none focus:ring-4 focus:ring-emerald-300/40">
+                    <i class="fa-solid fa-arrow-right mr-2"></i>
+                    Continue
+                </button>
+            </form>
+
+            <div id="welcome-success" class="welcome-success hidden items-center justify-center text-center">
+                <div>
+                    <div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-400 text-2xl text-white">
+                        <i class="fa-solid fa-check"></i>
+                    </div>
+                    <p id="welcome-message" class="title-font text-3xl font-semibold"></p>
+                    <p class="mt-3 text-sm text-slate-300">Your workspace is ready.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="app-shell" class="hidden">
     <!-- HEADER -->
     <div class="site-header bg-slate-900 border-b border-slate-700 sticky top-0 z-50">
         <div class="header-shell max-w-screen-2xl mx-auto px-6 py-5 flex items-center justify-between">
@@ -463,8 +453,7 @@
                     <i class="fa-solid fa-trash"></i>
                     <span class="hidden md:block">Clear All</span>
                 </button>
-                <div class="version-pill text-xs bg-slate-700 px-3 py-1 rounded-2xl font-mono">
-                    v1.0 &bull; Local Storage
+                <div id="header-greeting" class="text-sm font-semibold text-emerald-300">
                 </div>
             </div>
         </div>
@@ -622,6 +611,7 @@
             </div>
         </div>
     </div>
+    </div>
 
     <script>
         // ====================== BILLING MAPPING (4 accounts = 8 tables) ======================
@@ -661,6 +651,47 @@
 
         // ====================== DATA STORAGE ======================
         let records = []; // { id, date, post, shift }
+        let userName = "";
+
+        function loadUserName() {
+            userName = localStorage.getItem("riala_dtr_user_name") || "";
+        }
+
+        function saveUserName(name) {
+            userName = name;
+            localStorage.setItem("riala_dtr_user_name", name);
+        }
+
+        function displayName() {
+            return userName.trim() || "friend";
+        }
+
+        function updateGreeting() {
+            const greeting = document.getElementById("header-greeting");
+            if (greeting) {
+                greeting.textContent = `Welcome, ${displayName()}!`;
+            }
+        }
+
+        function showApp() {
+            document.getElementById("welcome-screen").classList.add("hidden");
+            document.getElementById("welcome-screen").classList.remove("flex");
+            document.getElementById("app-shell").classList.remove("hidden");
+            updateGreeting();
+        }
+
+        function handleWelcomeSubmit(event) {
+            event.preventDefault();
+
+            const input = document.getElementById("welcome-name");
+            saveUserName(input.value.trim());
+            document.getElementById("welcome-message").textContent = `Welcome, ${displayName()}!`;
+            document.getElementById("welcome-form").classList.add("hidden");
+            document.getElementById("welcome-success").classList.remove("hidden");
+            document.getElementById("welcome-success").classList.add("flex");
+
+            window.setTimeout(showApp, 950);
+        }
 
         function loadRecords() {
             const saved = localStorage.getItem("riala_dtr_records");
@@ -945,12 +976,18 @@
 
         // ====================== INITIALIZE ======================
         function init() {
+            loadUserName();
             loadRecords();
             renderRecordsList();
             
             // Set default date to today
             const today = new Date().toISOString().split("T")[0];
             document.getElementById("input-date").value = today;
+
+            document.getElementById("welcome-form").addEventListener("submit", handleWelcomeSubmit);
+            if (userName) {
+                document.getElementById("welcome-name").value = userName;
+            }
             
             console.log("%cRIALA DTR OTOMATIK by Argidaksii ready!", "color:#1e40af; font-weight:600");
         }
